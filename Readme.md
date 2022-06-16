@@ -1,4 +1,4 @@
-# Flask-O-shop
+# Flask-Store
 An E-Commerce app built with Python Flask
 
 **Features:**
@@ -18,12 +18,9 @@ An E-Commerce app built with Python Flask
 # Installation
 Downloading files:
 ```
-git clone https://github.com/diwash007/Flask-O-shop.git
+git clone https://github.com/joellpaim/Flask-Store.git
 ```
 Installing requirements:
 ```py
 pip install -r requirements.txt
 ```
-
-# Live Project
-https://flaskoshop.herokuapp.com
