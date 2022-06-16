@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Pedidos - Flask-Store
+{% endblock %}
+<script src="https://js.stripe.com/v3/"></script>
+{% block content %}
+	{% with msgs =  get_flashed_messages(with_categories=True) %}
+	{% for c, msg in msgs %}
+		{% if c == 'error' %}
+			<div class="flash-error">
+		{% else %}
+			<div class="success">
+		{% endif %}
+			{{ msg | safe }}</div><br>
+	{% endfor %}
+	{% endwith %}
+
+    {% if not orders %}
+		<div class="flash-error">
+			Você ainda não tem pedidos.<br>
+			<a href="{{ url_for('home') }}">Descobrir novoc itens</a>
+		</div>
+	{% else %}
+
+    <table class="table table-striped">
+        <tr>
+            <th>Id</th>
+            <th>Data</th>
+			<th>Produtos</th>
+			<th>Status</th>
+        </tr>
+    {% for order in orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+			<td>
+				{% for i in order.items %}
+					{{ i.item.name }} x <span class="success">{{ i.quantity }}</span><br>
+				{% endfor %}
+			</td>
+			<td>{{ order.status }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+	{% endif %}
+{% endblock %}

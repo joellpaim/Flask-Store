@@ -1,0 +1,53 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+	Usuários - Flask-Store
+{% endblock %}
+<script src="https://js.stripe.com/v3/"></script>
+{% block content %}
+	{% with msgs =  get_flashed_messages(with_categories=True) %}
+	{% for c, msg in msgs %}
+		{% if c == 'error' %}
+			<div class="flash-error">
+		{% else %}
+			<div class="success">
+		{% endif %}
+			{{ msg }}</div><br>
+	{% endfor %}
+	{% endwith %}
+
+    {% if not users %}
+		<div class="add-new btn-success btn">
+			<a href="{{ url_for('admin.adminregister') }}" class="text-light">Adicionar item</a>
+		</div>
+		<div class="flash-error">Não há produtos cadastrados.</div>
+	{% else %}
+    <div class="add-new btn-success btn">
+        <a href="{{ url_for('admin.adminregister') }}" class="text-light">Adicionar item</a>
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+			<th>Email</th>
+			<th>Telefone</th>
+			<th>Admin</th>
+			<th>Ações</th>
+        </tr>
+    {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+			<td>{{ user.email }}</td>
+			<td>{{ user.phone }}</td>
+			<td>{{ user.admin }}</td>
+			<td>
+                <a href="{{ url_for('admin.edit', type='user', id=user.id) }}">&#9998;</a>
+				<a href="{{ url_for('admin.delete', type='user', id=user.id) }}">&#10060;</a>
+			</td>			
+        </tr>
+    {% endfor %}
+    </table>
+
+	{% endif %}
+{% endblock %}

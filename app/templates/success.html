@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Payment Success - Flask-Store
+{% endblock %}
+
+{% block content %}
+    <div class="success">
+        Pagamento efetuado com sucesso!!<br>
+        Pedido realizado.
+        <a href="{{ url_for('orders') }}">Ver pedido</a>
+    </div>
+{% endblock %}

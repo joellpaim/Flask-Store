@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Falha de pagamento - Flask-Store
+{% endblock %}
+
+{% block content %}
+    <div class="flash-error">
+        Falha no pagamento. Por favor tente novamente.
+        <a href="{{ url_for('cart') }}">Voltar</a>
+    </div>
+{% endblock %}

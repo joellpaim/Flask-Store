@@ -1,0 +1,55 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+	Items - Flask-Store
+{% endblock %}
+<script src="https://js.stripe.com/v3/"></script>
+{% block content %}
+	{% with msgs =  get_flashed_messages(with_categories=True) %}
+	{% for c, msg in msgs %}
+		{% if c == 'error' %}
+			<div class="flash-error">
+		{% else %}
+			<div class="success">
+		{% endif %}
+			{{ msg }}</div><br>
+	{% endfor %}
+	{% endwith %}
+
+    {% if not items %}
+		<div class="add-new btn-success btn">
+			<a href="{{ url_for('admin.add') }}" class="text-light">Adicionar item</a>
+		</div>
+		<div class="flash-error">Não há produtos cadastrados.</div>
+	{% else %}
+    <div class="add-new btn-success btn">
+        <a href="{{ url_for('admin.add') }}" class="text-light">Adicionar item</a>
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>Item id</th>
+            <th>Nome</th>
+			<th>Preço</th>
+			<th>Categoria</th>
+			<th>Img Link</th>
+            <th>Detalhes</th>
+            <th>Operações</th>
+        </tr>
+    {% for item in items %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+			<td>{{ item.price }}</td>
+			<td>{{ item.category }}</td>
+			<td>{{ item.image[:15] }}...</td>
+            <td>{{ item.details[:40] | safe }}...</td>
+			<td>
+                <a href="{{ url_for('admin.edit', type='item', id=item.id) }}">&#9998;</a>
+				<a href="{{ url_for('admin.delete', type='item', id=item.id) }}">&#10060;</a>
+			</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+	{% endif %}
+{% endblock %}
