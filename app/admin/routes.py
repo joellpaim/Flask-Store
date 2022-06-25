@@ -139,4 +139,4 @@ def adminregister():
 		# send_confirmation_email(new_user.email)
 		flash('Administrador registrado com sucesso! Você deve logar agora.', 'success')
 		return redirect(url_for('login'))
-	return render_template("register.html", form=form)
+	return render_template("admin/register.html", form=form)

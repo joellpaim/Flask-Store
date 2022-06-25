@@ -18,25 +18,31 @@
 
     {% if not users %}
 		<div class="add-new btn-success btn">
-			<a href="{{ url_for('admin.adminregister') }}" class="text-light">Adicionar item</a>
+			<a href="{{ url_for('admin.adminregister') }}" class="text-light">
+				<i class='fa fa-plus' style='font-size:14px'>
+				</i> Adicionar</a>
 		</div>
-		<div class="flash-error">Não há produtos cadastrados.</div>
+		<div class="flash-error">Não há clientes cadastrados.</div>
 	{% else %}
     <div class="add-new btn-success btn">
-        <a href="{{ url_for('admin.adminregister') }}" class="text-light">Adicionar item</a>
+        <a href="{{ url_for('admin.adminregister') }}" class="text-light">
+			<i class='fa fa-plus' style='font-size:14px'>
+			</i> Adicionar</a>
     </div>
-    <table class="table table-striped">
+	<div class="table-responsive">
+    <table class="table">
+		<tbody class="table-hover">
         <tr>
-            <th>Id</th>
-            <th>Nome</th>
-			<th>Email</th>
-			<th>Telefone</th>
-			<th>Admin</th>
-			<th>Ações</th>
+            <th scope="col">Id</th>
+            <th scope="col">Nome</th>
+			<th scope="col">Email</th>
+			<th scope="col">Telefone</th>
+			<th scope="col">Admin</th>
+			<th scope="col">Ações</th>
         </tr>
     {% for user in users %}
         <tr>
-            <td>{{ user.id }}</td>
+            <td scope="row">{{ user.id }}</td>
             <td>{{ user.name }}</td>
 			<td>{{ user.email }}</td>
 			<td>{{ user.phone }}</td>
@@ -47,7 +53,9 @@
 			</td>			
         </tr>
     {% endfor %}
+	</tbody>
     </table>
+	</div>
 
 	{% endif %}
 {% endblock %}

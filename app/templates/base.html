@@ -14,8 +14,8 @@
   </head>
   <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="{{ url_for('home') }}">Flask-Store</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="{{ url_for('home') }}">Flask Store<b style="color: #73d580;">.</b></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -52,14 +52,14 @@
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class='fa fa-user-circle' style='font-size:25px'></i>
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
               <span class="nav-link text-muted">{{ current_user.name }}</a>
               <div class="dropdown-divider"></div>
               <a class="nav-link" href="{{ url_for('orders') }}">Pedidos</a>
               {% if current_user.admin == 1 %}
-              <a class="nav-link" href="{{ url_for('admin.dashboard') }}">Painel Admin</a>
+              <a class="nav-link" href="{{ url_for('admin.dashboard') }}">Configurações</a>
               {% endif %}
-              <a class="nav-link" href="{{ url_for('logout') }}"><font color="red">Sair</font></a>
+              <a class="nav-link" href="{{ url_for('logout') }}">Sair</a>
             </div>
           </li>
           {% endif %}
@@ -67,16 +67,46 @@
       </div>
     </nav>
 
+    <!-- Banner Starts Here -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner" style="height:300px">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="https://www.palbit.pt/media/cache/resolve/banner/uploads/PCBN_Prancheta%201.png" alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="https://www.palbit.pt/media/cache/resolve/banner/uploads/PCBN_Prancheta%201.png" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="https://www.palbit.pt/media/cache/resolve/banner/uploads/PCBN_Prancheta%201.png" alt="Third slide">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Anterior</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Próximo</span>
+  </a>
+</div>
+    <!-- Banner Ends Here -->
+
     <div class="container">
       <div class="main">
         {% block content %}
         {% endblock %}
       </div>
     </div>
-    <footer class="bg-light text-center text-lg-start fixarRodape">
+    <footer class="bg-dark text-lg-start text-light footer">
+      
       <div class="text-center p-3">
         © {{ now.year }} Copyright:
-        Flask-Store
+        Flask Store<b style="color: #73d580;">.</b>
       </div>
 
     </footer>

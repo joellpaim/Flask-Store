@@ -7,78 +7,178 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="{{ url_for('admin.static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('admin.static', filename='sidebar.css') }}">
+     <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+    <script>
+      var i = setInterval(function () {
+    
+    clearInterval(i);
+  
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("conteudo").style.display = "inline";
+
+    }, 2000);
+    </script>
 
     <title>{% block title %} {% endblock %}</title>
   </head>
   <body>
-    <!-- navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="{{ url_for('home') }}">Flask-Store</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('admin.dashboard') }}">Dashboard</a>
-          </li>
 
-          {% if not current_user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('login') }}">Login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('register') }}">Cadastro</a>
-            </li>
-          {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('admin.adminregister') }}">Cadastro Admin</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('admin.users') }}">Usuários</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('admin.items') }}">Itens</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('logout') }}">Sair</a>
-            </li>
-          {% endif %}
-          
-        </ul>
-      </div>
-    </nav>
-    
-      <!-- Content -->
-      <div id="content">
-        <div class="container-fluid">
-          
-            <div class="main">
-              {% block content %}
-              {% endblock %}
-            </div>
-          
-
-        </div>
-      </div>
+    <!-- tela de loading -->
+    <div id="loading" style="display: block;position: absolute;top: 50%;left: 50%;margin-right: -50%;transform: translate(-50%, -50%);">
+      <img src="http://media.giphy.com/media/FwviSlrsfa4aA/giphy.gif" style="width:150px;height:150px;" />
     </div>
 
+    <div>
+      <!-- navbar -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{ url_for('home') }}">Flask Store<b style="color: #73d580;">.</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+            </li>
+
+            {% if not current_user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('register') }}">Cadastro</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('admin.adminregister') }}">Cadastro Admin</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('admin.users') }}">Usuários</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('admin.items') }}">Itens</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('logout') }}">Sair</a>
+              </li>
+            {% endif %}
+            
+          </ul>
+        </div>
+      </nav>
+      
+      <div class="wrapper">
+
+        <!-- Sidebar -->
+        <nav id="sidebar">
+          <div class="sidebar-header">
+              <h4><a href="{{ url_for('home') }}"><i class='fa fa-angle-left' style='font-size:24px'></i> Voltar</a> </h4>
+          </div>
+
+          <ul class="list-unstyled components">
+              <p>Menu</p>
+              <li>
+                  <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class='fa fa-plus' style='font-size:14px'></i>  Cadastro</a>
+                  <ul class="collapse list-unstyled" id="homeSubmenu">
+                      <li>
+                          <a href="{{ url_for('admin.adminregister') }}">
+                          <i class='fa fa-user-tie' style='font-size:14px'></i> Administrador</a>
+                      </li>
+                      <li>
+                          <a href="{{ url_for('admin.users') }}">
+                          <i class='fa fa-user' style='font-size:14px'></i> Clientes</a>
+                      </li>
+                      <li>
+                          <a href="{{ url_for('admin.items') }}">
+                          <i class='fa fa-box' style='font-size:14px'></i> Produtos</a>
+                      </li>
+                  </ul>
+              </li>
+              <li>
+                  <a href="{{ url_for('admin.dashboard') }}">
+                  <i class='fa fa-chart-line' style='font-size:14px'></i> Dashboard</a>
+              </li>
+              <li>
+                  <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class='fa fa-industry' style='font-size:14px'></i> Sobre</a>
+                  <ul class="collapse list-unstyled" id="pageSubmenu">
+                      <li>
+                          <a href="#">Empresa</a>
+                      </li>
+                  </ul>
+              </li>
+              <li>
+                  <a href="#">
+                    <i class='fa fa-cogs' style='font-size:14px'>
+                  </i> Configurações</a>
+              </li>
+              <li>
+                  <a href="#">
+                    <i class='fa fa-phone' style='font-size:14px'>
+                    </i> Contato</a>
+              </li>
+          </ul>
+        </nav>
     
-    <footer class="bg-dark text-center text-lg-start text-light fixarRodape">
-      <!-- Copyright -->
-      <div class="text-center p-3">
-        © {{ now.year }} Copyright:
-        Flask-Store
+        <!-- Page Content -->
+        <div id="conteudo" style="display: none">
+          <div id="content">
+            <div class="container-fluid">
+              
+                <div class="main">              
+                  {% block content %}
+                  {% endblock %}
+                </div>
+            </div>
+          </div>
+        </div>
+    
+    
       </div>
-      <!-- Copyright -->
-    </footer>
+    
+      
+      <footer class="bg-dark text-center text-lg-start text-light footer">
+        <!-- Copyright -->
+        <div class="text-center p-3">
+          © {{ now.year }} Copyright:
+          Flask Store
+        </div>
+        <!-- Copyright -->
+      </footer>
+
+    </div>
+
+    <script>
+      $(document).ready(function () {
+
+      $('#sidebarCollapse').on('click', function () {
+          $('#sidebar').toggleClass('active');
+      });
+
+      });
+    </script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
   </body>
 </html>

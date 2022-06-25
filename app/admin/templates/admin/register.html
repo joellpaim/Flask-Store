@@ -1,11 +1,11 @@
-{% extends "base.html" %}
+{% extends "admin/base.html" %}
 
 {% block title %}
-	Login - Flask-Store
+	Cadastro Admin - Flask-Store
 {% endblock %}
 
 {% block content %}
-	<h3 class="text-center"> Login </h3>
+	<h3 class="text-center"> Cadastro para Flask-Store </h3>
 	<hr>
 	{% with msgs =  get_flashed_messages(with_categories=True) %}
 		{% for c, msg in msgs %}
