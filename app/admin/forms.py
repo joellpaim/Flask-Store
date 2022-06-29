@@ -15,7 +15,8 @@ class AddItemForm(FlaskForm):
 	submit = SubmitField("Adicionar")
 
 class AddBannerForm(FlaskForm):
-	image = MultipleFileField("Imagens:", validators=[DataRequired()])
+	image = FileField("Imagem:", validators=[DataRequired()])
+	submit = SubmitField("Salvar")
 
 class OrderEditForm(FlaskForm):
 	status = StringField("Status:", validators=[DataRequired()])

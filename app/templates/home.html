@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block content %}
+
+	{% include 'banner.html' %}
+
 	{% with msgs =  get_flashed_messages(with_categories=True) %}
 	{% for c, msg in msgs %}
 		{% if c == 'error' %}
@@ -16,9 +19,11 @@
 	{% endfor %}
 	{% endwith %}
 
+	
 	{% if search %}
 	<h3>Resultado da busca por "{{ query }}":</h3>
 	{% else %}
+	<div class="container main">
 	<h3>Lançamentos</h3>
 	<br>
 	<div class="items">
@@ -41,6 +46,7 @@
 		</div>
 	</a>
 	{% endfor %}
+	</div>
 	</div>	
 	{% endif %}
 

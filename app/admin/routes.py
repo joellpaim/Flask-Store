@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, url_for, flash
 from werkzeug.utils import redirect
 from werkzeug.security import generate_password_hash, check_password_hash
-from ..db_models import Order, Item, db, User
-from ..admin.forms import AddItemForm, OrderEditForm, AdminRegisterForm
+from ..db_models import Order, Item, db, User, Banner
+from ..admin.forms import AddItemForm, OrderEditForm, AdminRegisterForm, AddBannerForm
 from ..funcs import admin_only
 from flask_login import LoginManager, login_user, current_user, login_required, logout_user
 
@@ -26,6 +26,12 @@ def users():
     users = User.query.all()
     return render_template("admin/users.html", users=users)
 
+@admin.route('/banners')
+@admin_only
+def banners():
+    banners = Banner.query.all()
+    return render_template("admin/banners.html", banners=banners)
+
 @admin.route('/add', methods=['POST', 'GET'])
 @admin_only
 def add():
@@ -45,6 +51,31 @@ def add():
         flash(f'{name} added successfully!','success')
         return redirect(url_for('admin.items'))
     return render_template("admin/add.html", form=form)
+
+@admin.route('/addbanner', methods=['POST', 'GET'])
+@admin_only
+def addbanner():
+    form = AddBannerForm()
+
+    if form.validate_on_submit():
+        imagem = form.image.raw_data
+        print(imagem)
+        
+        form.image.data.save('app/static/uploads/' + form.image.data.filename)
+        image = url_for('static', filename=f'uploads/{form.image.data.filename}')
+        banner = Banner(image=image)
+        db.session.add(banner)
+        db.session.commit()
+
+        #form.image.data.save('app/static/uploads/' + form.image.data.filename)
+        #image = url_for('static', filename=f'uploads/{form.image.data.filename}')
+        
+        #item = Item(name=name, price=price, category=category, details=details, image=image, price_id=price_id)
+        #db.session.add(item)
+        #db.session.commit()
+        flash('added successfully!','success')
+        return redirect(url_for('admin.banners'))
+    return render_template("admin/addbanner.html", form=form)
 
 @admin.route('/edit/<string:type>/<int:id>', methods=['POST', 'GET'])
 @admin_only
@@ -112,6 +143,38 @@ def delete(type, id):
         db.session.commit()
         flash(f'{to_delete.name} deleted successfully', 'error')
         return redirect(url_for('admin.users'))
+    
+    elif type == "banner":
+        to_delete = Banner.query.get(id)
+        db.session.delete(to_delete)
+        db.session.commit()
+        flash(f'{to_delete.image} deleted successfully', 'error')
+        return redirect(url_for('admin.banners'))
+    return render_template('admin/home.html')
+
+@admin.route('/cleartable/<string:type>', methods=['POST', 'GET'])
+@admin_only
+def cleartable(type):
+    if type == "item":
+        db.session.execute("delete from items")
+        db.session.commit()
+        flash('deleted successfully', 'error')
+        return redirect(url_for('admin.items'))
+    
+    elif type == "user":
+        db.session.execute("delete from users")
+        db.session.commit()
+        flash('deleted successfully', 'error')
+        return redirect(url_for('admin.users'))
+    
+    elif type == "banner":
+        try:
+            db.session.execute("delete from banners")    
+            db.session.commit()
+            flash('deleted successfully', 'error')
+        except Exception as e:
+            print(f'\n\nErro: {e}\n\n')
+        return redirect(url_for('admin.banners'))
     return render_template('admin/home.html')
 
 @admin.route("/adminregister", methods=['POST', 'GET'])

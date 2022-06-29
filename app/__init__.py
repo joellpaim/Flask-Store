@@ -5,7 +5,7 @@ from flask_bootstrap import Bootstrap
 from .forms import LoginForm, RegisterForm
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, login_user, current_user, login_required, logout_user
-from .db_models import db, User, Item
+from .db_models import db, User, Item, Banner
 from itsdangerous import URLSafeTimedSerializer
 from .funcs import mail, send_confirmation_email, fulfill_order
 from dotenv import load_dotenv
@@ -47,7 +47,14 @@ def load_user(user_id):
 @app.route("/")
 def home():
 	items = Item.query.all()
-	return render_template("home.html", items=items)
+	banners = Banner.query.all()
+	qtds = []
+	q = 0
+	for i in range(len(banners)):
+		qtds.append(q)
+		q += 1
+
+	return render_template("home.html", items=items, banners=banners, qtds=qtds)
 
 @app.route("/login", methods=['POST', 'GET'])
 def login():
