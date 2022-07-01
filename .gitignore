@@ -2075,3 +2075,10 @@ env/Lib/site-packages/toml-0.10.2.dist-info/METADATA
 env/Lib/site-packages/toml-0.10.2.dist-info/RECORD
 env/Lib/site-packages/toml-0.10.2.dist-info/top_level.txt
 env/Lib/site-packages/toml-0.10.2.dist-info/WHEEL
+env/Lib/site-packages/PIL/_imaging.cp310-win_amd64.pyd
+env/Lib/site-packages/PIL/_imagingcms.cp310-win_amd64.pyd
+env/Lib/site-packages/PIL/_imagingft.cp310-win_amd64.pyd
+env/Lib/site-packages/PIL/_imagingmath.cp310-win_amd64.pyd
+env/Lib/site-packages/PIL/_imagingmorph.cp310-win_amd64.pyd
+env/Lib/site-packages/PIL/_imagingtk.cp310-win_amd64.pyd
+env/Lib/site-packages/PIL/_webp.cp310-win_amd64.pyd
