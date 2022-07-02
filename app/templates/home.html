@@ -23,85 +23,41 @@
 	{% if search %}
 	<h3>Resultado da busca por "{{ query }}":</h3>
 	{% else %}
-	<div class="container-xl">
-		<div class="row">
-			<div class="col-md-12">
-				<h2>Mais <b>Vendidos</b></h2>
-				<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-
-					<!-- Carousel indicators -->
-			<ol class="carousel-indicators">
-				{% for item in items %}
-					{% if item.id == 1 %}
-						<li data-target="#myCarousel" data-slide-to="{{ item.id }}" class="active"></li>		
-					{% else %}
-						<li data-target="#myCarousel" data-slide-to="{{ item.id }}"></li>
-					{% endif %}
-				{% endfor %}
-			</ol>   
+		<div class="container-xl">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>Mais <b>Vendidos</b></h2>
+					<div class="container" style="margin-top:50px;">
+						<div class="row">
+							{% for item in items[::-1] %}
+							<div class="col-md-3">
+								<div class="card-sl">
+									<a href="{{ url_for('item', id=item.id) }}"><div class="card-image">
+										<img
+											src="{{ item.image }}" />
+									</div>
+									</a>							
 				
-			<div class="carousel-inner">		
-				{% for item in items[::-1] %}	
-					{% if item.id == 1 %}
-					<!-- Wrapper for carousel items -->				
-						<div class="item carousel-item active">
-							<div class="row">
-					{% else %}
-						<div class="item carousel-item">
-							<div class="row">
-						
-					{% endif %}
-								
-									<div class="col-sm-3">									
-										<div class="thumb-wrapper">
-											<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-											<a href="{{ url_for('item', id=item.id) }}"></a>
-												<div class="img-box">
-													<img src="{{ item.image }}" class="img-fluid" alt="">									
-												</div>
-												<div class="thumb-content">
-													<h4>{{ item.name }}</h4>									
-													<div class="star-rating">
-														<ul class="list-inline">
-															<li class="list-inline-item"><i class="fa fa-star"></i></li>
-															<li class="list-inline-item"><i class="fa fa-star"></i></li>
-															<li class="list-inline-item"><i class="fa fa-star"></i></li>
-															<li class="list-inline-item"><i class="fa fa-star"></i></li>
-															<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-															<li><span class="text-muted" >({{ range(1, 51) | random }})</span></li>
-														</ul>
-
-													</div>
-													<p class="item-price"><strike>R$ 400.00</strike> <b>R$ {{ item.price }}</b></p>
-													<a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
-												</div>
-											</a>							
-										</div>								
-									</div>						
-								</div>			
+									<span class="wish-icon card-action"><i class="fa fa-heart-o"></i></span>
+									<div class="card-heading">
+										{{ item.name }}
+									</div>
+									<div class="card-text">
+										{{ item.details }}
+									</div>
+									<div class="card-text">
+										R$ {{ item.price }}
+									</div>
+									<a href="#" class="card-button"> Comprar </a>
+								</div>
+							</div>
+							{% endfor %}
 						</div>
-						
-				
-				
-				
-				
-				{% endfor %}
-			</div>
-			
-			<!-- Carousel controls -->
-			<a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-				<i class="fa fa-angle-left"></i>
-			</a>
-			<a class="carousel-control-next" href="#myCarousel" data-slide="next">
-				<i class="fa fa-angle-right"></i>
-			</a>
+					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-	
-	</div>
-	</div>	
+		</div>  
+
 	{% endif %}
 
 	
