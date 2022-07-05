@@ -27,15 +27,14 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h2>Featured <b>Products</b></h2>
-				<h2>{{ slide }}</h2>
 				<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
 				<!-- Carousel indicators -->
 				<ol class="carousel-indicators">
 					{% for i in range(slide) %}
-					{% if i == 1 %}					
-					<li data-target="#myCarousel" data-slide-to="{{ i - 1}}" class="active"></li>
+					{% if i == 0 %}					
+					<li data-target="#myCarousel" data-slide-to="{{ i }}" class="active"></li>
 					{% else %}
-					<li data-target="#myCarousel" data-slide-to="{{ i - 1}}"></li>
+					<li data-target="#myCarousel" data-slide-to="{{ i }}"></li>
 					{% endif %}
 					{% endfor %}
 				</ol>   
@@ -62,7 +61,6 @@
 									</div>
 									<div class="thumb-content">
 										<h4>{{ item.name }}</h4>
-										<h5>contar={{ contar.value }}</h5>
 										{% set contar.value = contar.value + 1 %}									
 										<div class="star-rating">
 											<ul class="list-inline">
@@ -90,54 +88,18 @@
 					{% endif %}						
 					
 					{% endfor %}
-				</div>
-				<!-- Carousel controls -->
-				<a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-					<i class="fa fa-angle-left"></i>
-				</a>
-				<a class="carousel-control-next" href="#myCarousel" data-slide="next">
-					<i class="fa fa-angle-right"></i>
-				</a>
+				</div>				
 			</div>
 		</div>
+		<!-- Carousel controls -->
+		<a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+			<i class="fa fa-angle-left"></i>
+		</a>
+		<a class="carousel-control-next" href="#myCarousel" data-slide="next">
+			<i class="fa fa-angle-right"></i>
+		</a>
+	</div>	
 	</div>
-	</div>
-<!--
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h2>Mais <b>Vendidos</b></h2>
-					<div class="container" style="margin-top:50px;">
-						<div class="row">
-							{% for item in items[::-1] %}
-							<div class="col-md-3">
-								<div class="card-sl">
-									<a href="{{ url_for('item', id=item.id) }}"><div class="card-image">
-										<img
-											src="{{ item.image }}" />
-									</div>
-									</a>							
-				
-									<span class="wish-icon card-action"><i class="fa fa-heart-o"></i></span>
-									<div class="card-heading">
-										{{ item.name }}
-									</div>
-									<div class="card-text">
-										{{ item.details }}
-									</div>
-									<div class="card-text">
-										R$ {{ item.price }}
-									</div>
-									<a href="#" class="card-button"> Comprar </a>
-								</div>
-							</div>
-							{% endfor %}
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>  
--->
 
 	{% endif %}
 

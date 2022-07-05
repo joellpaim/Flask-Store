@@ -18,7 +18,7 @@ h2::after {
 	margin: 0 auto;
 	height: 4px;
 	border-radius: 1px;
-	background: #7ac400;
+	background: #73d580;
 	left: 0;
 	right: 0;
 	bottom: -20px;
@@ -64,12 +64,12 @@ h2::after {
 	margin-bottom: 5px;
 }
 .carousel .thumb-content .btn {
-	color: #7ac400;
+	color: #73d580;
 	font-size: 11px;
 	text-transform: uppercase;
 	font-weight: bold;
 	background: none;
-	border: 1px solid #7ac400;
+	border: 1px solid #73d580;
 	padding: 6px 14px;
 	margin-top: 5px;
 	line-height: 16px;
@@ -77,7 +77,7 @@ h2::after {
 }
 .carousel .thumb-content .btn:hover, .carousel .thumb-content .btn:focus {
 	color: #fff;
-	background: #7ac400;
+	background: #73d580;
 	box-shadow: none;
 }
 .carousel .thumb-content .btn i {
@@ -96,13 +96,13 @@ h2::after {
 .carousel-control-prev, .carousel-control-next {
 	height: 44px;
 	width: 40px;
-	background: #7ac400;	
+	background: #73d580;	
 	margin: auto 0;
 	border-radius: 4px;
 	opacity: 0.8;
 }
 .carousel-control-prev:hover, .carousel-control-next:hover {
-	background: #78bf00;
+	background: #73d580;
 	opacity: 1;
 }
 .carousel-control-prev i, .carousel-control-next i {

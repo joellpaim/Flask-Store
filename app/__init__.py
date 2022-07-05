@@ -10,6 +10,7 @@ from itsdangerous import URLSafeTimedSerializer
 from .funcs import mail, send_confirmation_email, fulfill_order
 from dotenv import load_dotenv
 from .admin.routes import admin
+from math import ceil
 
 
 load_dotenv()
@@ -48,10 +49,8 @@ def load_user(user_id):
 def home():
 	items = Item.query.all()
 	banners = Banner.query.all()
-	slide = (len(items)/4)
-	if type(slide) == "float":
-		slide = int(round(slide)+1)
-	
+	slide = int(ceil(len(items)/4))	
+		
 
 	return render_template("home.html", items=items, banners=banners, slide=slide)
 
