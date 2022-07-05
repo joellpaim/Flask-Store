@@ -50,8 +50,6 @@ def home():
 	items = Item.query.all()
 	banners = Banner.query.all()
 	slide = int(ceil(len(items)/4))	
-		
-
 	return render_template("home.html", items=items, banners=banners, slide=slide)
 
 @app.route("/login", methods=['POST', 'GET'])
@@ -63,7 +61,7 @@ def login():
 		email = form.email.data
 		user = User.query.filter_by(email=email).first()
 		if user == None:
-			flash(f'User with email {email} doesn\'t exist!<br> <a href={url_for("register")}>Register now!</a>', 'error')
+			flash(f'Não existe usuário com email: {email} <br> <a href={url_for("register")}>Cadastrar agora</a>', 'error')
 			return redirect(url_for('login'))
 		elif check_password_hash(user.password, form.password.data):
 			login_user(user)
@@ -81,7 +79,7 @@ def register():
 	if form.validate_on_submit():
 		user = User.query.filter_by(email=form.email.data).first()
 		if user:
-			flash(f"User with email {user.email} already exists!!<br> <a href={url_for('login')}>Login now!</a>", "error")
+			flash(f"Usuário com email {user.email} já existe!!<br> <a href={url_for('login')}>Entrar agora</a>", "error")
 			return redirect(url_for('register'))
 		new_user = User(name=form.name.data,
 						email=form.email.data,
@@ -94,7 +92,7 @@ def register():
 		db.session.add(new_user)
 		db.session.commit()
 		# send_confirmation_email(new_user.email)
-		flash('Thanks for registering! You may login now.', 'success')
+		flash('Obrigado por seu cadastro! Você deve logar agora.', 'success')
 		return redirect(url_for('login'))
 	return render_template("register.html", form=form)
 
@@ -104,16 +102,16 @@ def confirm_email(token):
 		confirm_serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
 		email = confirm_serializer.loads(token, salt='email-confirmation-salt', max_age=3600)
 	except:
-		flash('The confirmation link is invalid or has expired.', 'error')
+		flash('O link de confirmação é inválido ou está expirado.', 'error')
 		return redirect(url_for('login'))
 	user = User.query.filter_by(email=email).first()
 	if user.email_confirmed:
-		flash(f'Account already confirmed. Please login.', 'success')
+		flash(f'Conta já confirmada. Por favor entrar.', 'success')
 	else:
 		user.email_confirmed = True
 		db.session.add(user)
 		db.session.commit()
-		flash('Email address successfully confirmed!', 'success')
+		flash('Email confirmado com sucesso!', 'success')
 	return redirect(url_for('login'))
 
 @app.route("/logout")
@@ -127,20 +125,20 @@ def logout():
 def resend():
 	send_confirmation_email(current_user.email)
 	logout_user()
-	flash('Confirmation email sent successfully.', 'success')
+	flash('Email de confirmação enviado com sucesso.', 'success')
 	return redirect(url_for('login'))
 
 @app.route("/add/<id>", methods=['POST'])
 def add_to_cart(id):
 	if not current_user.is_authenticated:
-		flash(f'You must login first!<br> <a href={url_for("login")}>Login now!</a>', 'error')
+		flash(f'Você precisa entrar primeiro!<br> <a href={url_for("login")}>Entrar agora!</a>', 'error')
 		return redirect(url_for('login'))
 
 	item = Item.query.get(id)
 	if request.method == "POST":
 		quantity = request.form["quantity"]
 		current_user.add_to_cart(id, quantity)
-		flash(f'''{item.name} successfully added to the <a href=cart>cart</a>.<br> <a href={url_for("cart")}>view cart!</a>''','success')
+		flash(f'''O {item.name} foi adicionado com sucesso ao <a href=cart>cart</a>.<br> <a href={url_for("cart")}>ver carrinho</a>''','success')
 		return redirect(url_for('home'))
 
 @app.route("/cart")
