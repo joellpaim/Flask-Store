@@ -58,7 +58,7 @@ def add():
                     details=details, image=image, price_id=price_id)
         db.session.add(item)
         db.session.commit()
-        flash(f'{name} added successfully!', 'success')
+        flash(f'{name} adicionado com sucesso!', 'success')
         return redirect(url_for('admin.items'))
     return render_template("admin/add.html", form=form)
 
@@ -80,7 +80,7 @@ def addbanner():
         db.session.add(banner)
         db.session.commit()
 
-        flash('added successfully!', 'success')
+        flash('adicionado com sucesso!', 'success')
         return redirect(url_for('admin.banners'))
     return render_template("admin/addbanner.html", form=form)
 
@@ -145,21 +145,21 @@ def delete(type, id):
         to_delete = Item.query.get(id)
         db.session.delete(to_delete)
         db.session.commit()
-        flash(f'{to_delete.name} deleted successfully', 'error')
+        flash(f'{to_delete.name} deletado com sucesso!', 'error')
         return redirect(url_for('admin.items'))
 
     elif type == "user":
         to_delete = User.query.get(id)
         db.session.delete(to_delete)
         db.session.commit()
-        flash(f'{to_delete.name} deleted successfully', 'error')
+        flash(f'{to_delete.name} deletado com sucesso!', 'error')
         return redirect(url_for('admin.users'))
 
     elif type == "banner":
         to_delete = Banner.query.get(id)
         db.session.delete(to_delete)
         db.session.commit()
-        flash(f'{to_delete.image} deleted successfully', 'error')
+        flash(f'{to_delete.image} deletado com sucesso!', 'error')
         return redirect(url_for('admin.banners'))
     return render_template('admin/home.html')
 
@@ -170,20 +170,20 @@ def cleartable(type):
     if type == "item":
         db.session.execute("delete from items")
         db.session.commit()
-        flash('deleted successfully', 'error')
+        flash('deletado com sucesso!', 'error')
         return redirect(url_for('admin.items'))
 
     elif type == "user":
         db.session.execute("delete from users")
         db.session.commit()
-        flash('deleted successfully', 'error')
+        flash('deletado com sucesso!', 'error')
         return redirect(url_for('admin.users'))
 
     elif type == "banner":
         try:
             db.session.execute("delete from banners")
             db.session.commit()
-            flash('deleted successfully', 'error')
+            flash('deletado com sucesso!', 'error')
         except Exception as e:
             print(f'\n\nErro: {e}\n\n')
         return redirect(url_for('admin.banners'))
@@ -200,7 +200,7 @@ def adminregister():
         user = User.query.filter_by(email=form.email.data).first()
         if user:
             flash(
-                f"User with email {user.email} already exists!!<br> <a href={url_for('login')}>Login now!</a>", "error")
+                f"O Usuário com email {user.email} já existe!!<br> <a href={url_for('login')}>Entrar agora</a>", "error")
             return redirect(url_for('adminregister'))
         new_user = User(name=form.name.data,
                         email=form.email.data,

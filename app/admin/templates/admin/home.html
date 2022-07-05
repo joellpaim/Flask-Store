@@ -5,6 +5,7 @@
 {% endblock %}
 <script src="https://js.stripe.com/v3/"></script>
 {% block content %}
+<div class="container mg-auto p-5 text-center">
 	{% with msgs =  get_flashed_messages(with_categories=True) %}
 	{% for c, msg in msgs %}
 		{% if c == 'error' %}
@@ -46,4 +47,5 @@
     </table>
 
 	{% endif %}
+</div>
 {% endblock %}

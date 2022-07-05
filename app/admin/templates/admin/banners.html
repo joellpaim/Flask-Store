@@ -5,6 +5,7 @@
 {% endblock %}
 <script src="https://js.stripe.com/v3/"></script>
 {% block content %}
+<div class="container">
 	{% with msgs =  get_flashed_messages(with_categories=True) %}
 	{% for c, msg in msgs %}
 		{% if c == 'error' %}
@@ -22,12 +23,14 @@
 		</div>
 		<div class="flash-error">Não há banners cadastrados.</div>
 	{% else %}
-    <div class="add-new btn-success btn">
-        <a href="{{ url_for('admin.addbanner') }}" class="text-light">Adicionar</a>
-    </div>
-	<div class="add-new btn-success btn">
-        <a href="{{ url_for('admin.cleartable', type='banner') }}" class="text-light">Limpar tabela</a>
-    </div>
+	<section>	
+		<div class="add-new btn-success btn">
+			<a href="{{ url_for('admin.addbanner') }}" class="text-light">Adicionar</a>
+		</div>
+		<div class="add-new btn-success btn">
+			<a href="{{ url_for('admin.cleartable', type='banner') }}" class="text-light">Limpar tabela</a>
+		</div>
+	</section>
 	<div class="table-responsive">
     <table class="table table-striped">
         <tr>            
@@ -49,4 +52,5 @@
 	</div>
 
 	{% endif %}
+</div>
 {% endblock %}
