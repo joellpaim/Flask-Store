@@ -48,13 +48,12 @@ def load_user(user_id):
 def home():
 	items = Item.query.all()
 	banners = Banner.query.all()
-	qtds = []
-	q = 0
-	for i in range(len(banners)):
-		qtds.append(q)
-		q += 1
+	slide = (len(items)/4)
+	if type(slide) == "float":
+		slide = int(round(slide)+1)
+	
 
-	return render_template("home.html", items=items, banners=banners, qtds=qtds)
+	return render_template("home.html", items=items, banners=banners, slide=slide)
 
 @app.route("/login", methods=['POST', 'GET'])
 def login():

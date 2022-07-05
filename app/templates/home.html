@@ -23,7 +23,87 @@
 	{% if search %}
 	<h3>Resultado da busca por "{{ query }}":</h3>
 	{% else %}
-		<div class="container-xl">
+	<div class="container-xl">
+		<div class="row">
+			<div class="col-md-12">
+				<h2>Featured <b>Products</b></h2>
+				<h2>{{ slide }}</h2>
+				<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+				<!-- Carousel indicators -->
+				<ol class="carousel-indicators">
+					{% for i in range(slide) %}
+					{% if i == 1 %}					
+					<li data-target="#myCarousel" data-slide-to="{{ i - 1}}" class="active"></li>
+					{% else %}
+					<li data-target="#myCarousel" data-slide-to="{{ i - 1}}"></li>
+					{% endif %}
+					{% endfor %}
+				</ol>   
+				<!-- Wrapper for carousel items -->
+				<div class="carousel-inner">
+					
+					{% set contar = namespace(value=1) %}
+					{% for item in items[::-1] %}
+					{% if contar.value == 1 %}
+					<div class="item carousel-item active">
+						<div class="row">
+					{% elif contar.value == 5 or contar.value == 9 or contar.value == 12 %}
+					<div class="item carousel-item">
+						<div class="row">
+					{% else %}
+						
+					{% endif %}
+						
+							<div class="col-sm-3">
+								<div class="thumb-wrapper m-lg-2">
+									<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+									<div class="img-box">
+										<img src="{{ item.image }}" class="img-fluid" alt="">									
+									</div>
+									<div class="thumb-content">
+										<h4>{{ item.name }}</h4>
+										<h5>contar={{ contar.value }}</h5>
+										{% set contar.value = contar.value + 1 %}									
+										<div class="star-rating">
+											<ul class="list-inline">
+												<li class="list-inline-item"><i class="fa fa-star"></i></li>
+												<li class="list-inline-item"><i class="fa fa-star"></i></li>
+												<li class="list-inline-item"><i class="fa fa-star"></i></li>
+												<li class="list-inline-item"><i class="fa fa-star"></i></li>
+												<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+											</ul>
+										</div>
+										<p class="item-price"><strike>$400.00</strike> <b>R$ {{ item.price }}</b></p>
+										<a href="{{ url_for('item', id=item.id) }}" class="btn btn-primary">Ver detalhes</a>
+									</div>						
+								</div>
+							</div>	
+
+					{% if contar.value == 1 %}
+						</div>						
+						</div>
+					{% elif contar.value == 5 or contar.value == 9 or contar.value == 12 %}
+						</div>						
+						</div>
+					{% else %}
+						
+					{% endif %}						
+					
+					{% endfor %}
+				</div>
+				<!-- Carousel controls -->
+				<a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+					<i class="fa fa-angle-left"></i>
+				</a>
+				<a class="carousel-control-next" href="#myCarousel" data-slide="next">
+					<i class="fa fa-angle-right"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+	</div>
+<!--
+		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<h2>Mais <b>Vendidos</b></h2>
@@ -57,8 +137,10 @@
 				</div>
 			</div>
 		</div>  
+-->
 
 	{% endif %}
+
 
 	
 	{% if not items %}
