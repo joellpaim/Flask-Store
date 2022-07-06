@@ -176,3 +176,7 @@ h2::after {
 	font-size: 14px;
 	color: #ffc000;
 }
+.img-profile {
+	max-width: 25px;
+	max-height: 25px;
+}
