@@ -15,10 +15,11 @@
 			{{ msg | safe}}</div><br>
 	{% endfor %}
 	{% endwith %}
-
+	<div class="container">
+		<div class="card mg-auto mt-5" style="width: 25rem;">
 			<div class="item-display">
 				<div class="img-wrapper">
-					<img src="{{ item.image }}" class="pic">
+					<img src="{{ item.image }}" class="card-img-top">
 				</div>
 				<b>{{ item.name }}</b>
 				<span class="right-item">R$ {{ item.price }}</span><br>
@@ -38,6 +39,8 @@
                 </form>
 				</a>
 			</div>
+		</div>
+	</div>
 
 {% endblock %}
 
