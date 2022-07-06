@@ -49,7 +49,7 @@ def admin_only(func):
 		if current_user.is_authenticated and current_user.admin == 1:
 			return func(*args, **kwargs)
 		else:
-			return "You are not Authorized to access this URL."
+			return "Você não está autorizado a acessar esta URL."
 	wrapper.__name__ = func.__name__
 	return wrapper
 		

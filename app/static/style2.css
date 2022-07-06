@@ -33,7 +33,7 @@ h2::after {
 	text-align: center;
 	overflow: hidden;
 }
-.carousel .thumb-wrapper {
+.carousel .thumb-wrapper, .card {
 	padding: 25px 15px;
 	background: #fff;
 	border-radius: 6px;
@@ -80,6 +80,23 @@ h2::after {
 	background: #73d580;
 	box-shadow: none;
 }
+.btn-detalhe {
+	color: #73d580;
+	font-size: 11px;
+	text-transform: uppercase;
+	font-weight: bold;
+	background: none;
+	border: 1px solid #73d580;
+	padding: 6px 14px;
+	margin-top: 5px;
+	line-height: 16px;
+	border-radius: 20px;
+}
+.btn-detalhe:hover, .btn-detalhe:focus {
+	color: #fff;
+	background: #73d580;
+	box-shadow: none;
+}
 .carousel .thumb-content .btn i {
 	font-size: 14px;
 	font-weight: bold;
@@ -94,7 +111,7 @@ h2::after {
 	margin-right: 5px;
 }
 .carousel-control-prev, .carousel-control-next {
-	height: 44px;
+	height: 40px;
 	width: 40px;
 	background: #73d580;	
 	margin: auto 0;
