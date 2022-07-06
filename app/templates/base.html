@@ -64,11 +64,17 @@
         <span class="navbar-toggler-icon"></span>
       </button>
     
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="form-inline my-2 my-lg-0 ml-auto" action="{{ url_for('search') }}">
-          <input class="form-control mr-sm-2" type="search" name="query" placeholder="" size="40" required>
-          <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Buscar">
-        </form>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">        
+        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="{{ url_for('search') }}">
+          <div class="input-group">
+              <input class="form-control bg-light border-0 small" placeholder="" aria-label="Search" aria-describedby="basic-addon2" type="search" name="query" >
+              <div class="input-group-append">
+                  <button class="btn btn-primary" type="submit">
+                      <i class="fas fa-search fa-sm"></i>
+                  </button>
+              </div>
+          </div>
+      </form>
         <ul class="navbar-nav ml-auto">
           {% if not current_user.is_authenticated %}
           <li class="nav-item">
